@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>%(identifier)s History</title>
+
+<link rel="stylesheet" type="text/css" media="all" href="/releasemodule/styles/oneColLiqCtrHdr.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/editormodule/styles/themes/custom/jquery-ui-1.8.20.custom.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/editormodule/styles/themes/custom/jquery-ui-1.8.20.custom.wwpdb.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/editormodule/styles/navigation.css" />
+
+<script type="text/javascript" src="/editormodule/js/jquery/core/jquery.min.js">
+<script type="text/javascript" src="/editormodule/js/jquery/ui/jquery-ui.custom.min.js"></script>
+<script type="text/javascript">
+     function show_detail(sessionid, identifier, id) {
+          if ($('#detail_' + id).is(':visible')) {
+              $('#td_detail_' + id).html('');
+              $('#detail_' + id).hide();
+          } else {
+              var html = '';
+              $.ajax({ type: 'POST', async: false, url: '/service/release/view_entry_history_detail',
+                       data: 'identifier='+identifier+'&sessionid='+sessionid+'&index='+id,
+                       dataType: 'json',
+                       success: function(jsonOBJ) {
+                           if (!jsonOBJ.errorflag) {
+                                html = jsonOBJ.textcontent;
+                           } else {
+                                alert(jsonOBJ.errortext);
+                           }
+                       },
+                       error: function (data, status, e) {
+                           alert(e);
+                       }
+              });
+              $('#td_detail_' + id).html(html);
+              $('#detail_' + id).show();
+          }
+     }
+</script>
+<!--
+<script type="text/javascript" src="/assets/js/jquery-11/plugins/spin.js"></script>
+<script type="text/javascript" src="/assets/js/jquery-11/plugins/jquery.spin.js"></script>
+<script type="text/javascript" src="/releasemodule/js/main.js?v=20161123"></script>
+-->
+</head>
+<body class="oneColLiqCtrHdr">
+<div id="container">
+<!-- begin #header-->
+       <div id="header">
+           <div id="logo"><img src="/images/wwpdb_logo.gif" width="187" height="58" alt="logo" /> </div>
+           <div id="headerCont">
+                    <h1>%(identifier)s Release History</h1>
+              </div>
+           <br class="clearfloat" /> 
+       </div>
+<!-- #header ends above-->
+<!-- #mainContent begins -->
+       <div id="mainContent">
+           <br />
+<table>
+<tr>
+<th>Ann.</th>
+<th>Task Name/Status</th>
+<th>Release Option</th>
+<th>Start/Finish Time</th>
+<th>Process</th>
+</tr>
+%(table_rows)s
+</table>
+           <br class="clearfloat"/>
+       </div>
+       <!-- #mainContent ends with above /div -->
+<!-- #footer begins -->
+       <br class="clearfloat" />
+       <div id="footer">
+                 <p>&copy; 2013 wwPDB Release Module V0.01</p>
+       </div>
+<!-- #footer ends above -->
+</div>
+<!-- #container ends above-->
+</body>
+</html>

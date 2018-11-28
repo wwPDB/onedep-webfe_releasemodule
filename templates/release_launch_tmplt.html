@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Release Module</title>
+
+<link rel="stylesheet" type="text/css" media="all" href="/releasemodule/styles/oneColLiqCtrHdr.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/editormodule/styles/themes/custom/jquery-ui-1.8.20.custom.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/editormodule/styles/themes/custom/jquery-ui-1.8.20.custom.wwpdb.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/editormodule/styles/navigation.css" />
+<script type="text/javascript">
+       var SESSION_ID = '%(sessionid)s';
+       var DEPID     = '%(identifier)s';
+       var FILE_SOURCE = '%(filesource)s';
+       var INSTANCE = '%(instance)s';
+       var annotator = '%(annotator)s';
+</script>
+<script type="text/javascript" src="/editormodule/js/jquery/core/jquery.min.js"></script><!-- as of 2012-03-16, latest vrsn of jQuery core is 1.7.1 -->
+<script type="text/javascript" src="/editormodule/js/jquery/ui/jquery-ui.custom.min.js"></script>
+<!-- <script type="text/javascript" src="/releasemodule/js/jquery.blockUI.js"></script> -->
+<script type="text/javascript" src="/assets/js/jquery-11/plugins/spin.js"></script>
+<script type="text/javascript" src="/assets/js/jquery-11/plugins/jquery.spin.js"></script>
+<script type="text/javascript" src="/releasemodule/js/main.js"></script>
+</head>
+<body class="oneColLiqCtrHdr">
+<div id="container">
+<!-- begin #header-->
+       <div id="header">
+           <div id="logo"><img src="/images/wwpdb_logo.gif" width="187" height="58" alt="logo" /> </div>
+           <div id="headerCont">
+                    <h1>Release Module</h1>
+              </div>
+           <br class="clearfloat" /> 
+       </div>
+<!-- #header ends above-->
+<!-- #mainContent begins -->
+       <div id="mainContent">
+              <br />
+              <div class="navBar">
+                     <ul class="nav">
+                           <li class="topnav"><a class="submit" name="citation_finder" style="font-size: 0.9em;" href="#" value="Citation Finder">Citation Finder&nbsp;</a>
+                           <li class="topnav"><a class="submit" name="citation_update" style="font-size: 0.9em;" href="#" value="Citation Update with Pubmed">Citation Update with Pubmed&nbsp;</a>
+                           <li class="topnav"><a class="submit" name="citation_update" style="font-size: 0.9em;" href="#" value="Citation Update without Pubmed">Citation Update without Pubmed&nbsp;</a>
+                           <li class="topnav"><a class="submit" name="release_onhold"  style="font-size: 0.9em;" href="#" value="Entries to be released">Entries to be released&nbsp;</a>
+                           <li class="topnav"><a class="submit" name="expired_onhold"  style="font-size: 0.9em;" href="#" value="Expired AUTH/HOLD/HPUB Entries">Expired AUTH/HOLD/HPUB Entries&nbsp;</a>
+<!--
+                           <li class="topnav"><a class="submit" name="release_onhold"  style="font-size: 0.9em;" href="#" value="Author Requested Release">Author Requested Release&nbsp;</a>
+                           <li class="topnav"><a class="submit" name="status_update"   style="font-size: 0.9em;" href="#" value="Status Update">Status Update&nbsp;</a>
+-->
+                           <li class="topnav"><a class="submit" name="release_entry"   style="font-size: 0.9em;" href="#" value="Entries in release pending">Entries in release pending&nbsp;</a>
+                           <li class="topnav"><a class="submit" name="check_marked_pubmed_id"   style="font-size: 0.9em;" href="#" value="Check Marked PubMed IDs">Check Marked PubMed IDs&nbsp;</a>
+                           <li class="topnav"><a class="submit" name="download_file"   style="font-size: 0.9em;" href="#" value="Download File">Download File&nbsp;</a>
+                           <li class="topnav"><a class="submit" name="download_logfile" style="font-size: 0.9em;" href="#" value="Download Log File">Download Log File&nbsp;</a>
+                           <li class="topnav"><a class="submit" name="view_release_history" style="font-size: 0.9em;" href="#" value="Release History">Release History&nbsp;</a>
+                           <li class="topnav"><a class="submit" name="view_last_release_info" style="font-size: 0.9em;" href="#" value="View Last Release Info">View Last Release Info&nbsp;</a>
+                           <li class="topnav"><a class="submit" name="view_all_release_info" style="font-size: 0.9em;" href="#" value="View All Release Info">View All Release Info&nbsp;</a>
+                     </ul>
+              </div>
+
+              <br /><br /> <span style="float:right;"> Annotator: &nbsp; %(owner_selection)s </span>
+
+              <!-- progress spinner -->
+              <div id="loading">
+                   <div id="loadingcontent">
+                        <p id="loadingspinner">
+                            Running ...
+                        </p>
+                   </div>
+              </div>
+
+              <br />
+              <div id="editor_pane" class="" style="width: 100%%; margin-left: 1%%; margin-top: 30px;">
+                   <div id="dt_rslts_combo">
+%(result_list)s
+                   </div>
+              </div>
+              <!-- #main editor_pane ends with above /div -->
+              <br class="clearfloat"/>
+                     
+       </div>
+       <!-- #mainContent ends with above /div -->
+<!-- #footer begins -->
+       <br class="clearfloat" />
+       <div id="footer">
+                 <p>&copy; 2013 wwPDB Release Module V0.01</p>
+       </div>
+<!-- #footer ends above -->
+</div>
+<!-- #container ends above-->
+</body>
+</html>

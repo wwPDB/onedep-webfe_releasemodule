@@ -1,0 +1,40 @@
+<h1 style="text-align:center">%(task)s (%(owner)s)</h1>
+
+<form name="citation_update" id="citation_update" method="post">
+<input type="hidden" name="sessionid" id="sessionid_citation" value="%(sessionid)s" />
+<input type="hidden" name="annotator" id="annotator_citation" value="%(annotator)s" />
+<input type="hidden" name="owner" id="owner_citation" value="%(owner)s" />
+<input type="hidden" name="input_flag" id="input_flag" value="no" />
+<input type="hidden" name="pubmed_file" value="%(pubmed_file)s" />
+<input type="hidden" name="option" value="citation_update" />
+<input type="hidden" name="task" id="task_citation" value="%(task)s" />
+<table>
+<tr> %(finder_summary)s </tr>
+<tr><td style="text-align:center; border-style:none" colspan="4">&nbsp;</td></tr>
+<tr>
+<td style="text-align:center; border-style:none">
+<input id="citation_update_select_all" value="Select All" type="button" onClick="select_entry('citation_update', 'citation_update_select_all');" />
+</td>
+%(begin_select_all_comment)s
+<td style="text-align:center; border-style:none">
+<input id="citation_update_option" value="Copy Option" type="button" onClick="copy_option_from_first_selected_entry('citation_update');" />
+</td>
+%(end_select_all_comment)s
+<td style="text-align:center; border-style:none">
+<input id="run_citation_update_control" name="%(idlist)s" class="list_control" value="collapse all" type="button" />
+</td>
+<td style="text-align:center; border-style:none">
+<input id="run_citation_update" name="run_citation_update" class="run_update" value="Update citation without release" type="button" />
+</td>
+<td style="text-align:center; border-style:none" colspan="2">
+<input id="run_citation_update" name="run_citation_update" class="run_update" value="Update citation & release entries with release mark" type="button" />
+</td>
+</tr>
+</table>
+<br class="clearfloat" />
+<br />
+<table>
+%(entry_info)s
+</table>
+
+</form>

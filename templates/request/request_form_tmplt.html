@@ -1,0 +1,44 @@
+<h1 style="text-align:center">%(task)s (%(owner)s)</h1>
+
+<form name="request_release" id="request_release" method="post">
+<input type="hidden" name="sessionid" id="sessionid_request" value="%(sessionid)s" />
+<input type="hidden" name="annotator" id="annotator_request" value="%(annotator)s" />
+<input type="hidden" name="owner" id="owner_request" value="%(owner)s" />
+<input type="hidden" name="option" value="request_release" />
+<input type="hidden" name="task" id="task_request" value="%(task)s" />
+<table>
+<tr>
+<td style="text-align:center; border-style:none">
+<input id="request_release_select_all" value="Select All" type="button" onClick="select_entry('request_release', 'request_release_select_all');" />
+</td>
+%(begin_select_all_comment)s
+<td style="text-align:center; border-style:none">
+<input id="request_release_option" value="Copy Option" type="button" onClick="copy_option_from_first_selected_entry('request_release');" />
+</td>
+%(end_select_all_comment)s
+<td style="text-align:center; border-style:none">
+<input id="run_request_release_control" name="%(atlist)s" class="list_control" value="collapse all" type="button" />
+</td>
+<td style="text-align:center; border-style:none">
+<input id="run_request_release" name="run_request_release" class="run_update" value="Release selected" type="button" />
+</td>
+</tr>
+</table>
+<br class="clearfloat" />
+<br />
+<table>
+<tr>
+<th>Dep ID</th>
+<th>PDB/BMRB/EMDB IDs</th>
+<th>Annotator</th>
+<th>Entry Status</th>
+<th>Exp. Data Status</th>
+<th>Author's Release Status</th>
+<th>Exp. Method</th>
+<th>Deposition Date</th>
+<th>Initial/Last Release Date</th>
+<th>Hold Date</th>
+</tr>
+%(table_rows)s
+</table>
+</form>

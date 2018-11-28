@@ -1,0 +1,19 @@
+<h1 style="text-align:center">%(task)s</h1>
+
+<form name="request_removal" id="request_removal" method="post">
+<input type="hidden" name="sessionid" id="sessionid_request" value="%(sessionid)s" />
+<input type="hidden" name="annotator" id="annotator_request" value="%(annotator)s" />
+<input type="hidden" name="owner" id="owner_request" value="%(owner)s" />
+<input type="hidden" name="option" value="request_removal" />
+<input type="hidden" name="task" id="task_request" value="%(task)s" />
+<table>
+<tr><td style="text-align:center; border-style:none">
+<input id="run_request_removal" name="run_request_removal" class="run_removal" value="Remove selected PubMed ID(s)" type="button" />
+</td></tr>
+</table>
+<br class="clearfloat" />
+<br />
+<table>
+%(table_rows)s
+</table>
+</form>

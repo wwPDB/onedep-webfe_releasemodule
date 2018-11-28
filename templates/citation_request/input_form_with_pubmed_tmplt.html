@@ -1,0 +1,44 @@
+<h1 style="text-align:center">%(task)s</h1>
+
+<form name="citation_request" id="citation_request" method="post">
+<input type="hidden" name="sessionid" id="sessionid_request" value="%(sessionid)s" />
+<input type="hidden" name="annotator" id="annotator_request" value="%(annotator)s" />
+<input type="hidden" name="owner" id="owner_citation" value="%(annotator)s" />
+<input type="hidden" name="task" value="%(task)s" />
+<table>
+
+<tr>
+<td style="text-align:left;border-style:none;width:140px">&nbsp;</td>
+<td style="text-align:left;border-style:none">
+Syntax: pubmed_id (for primary citation only) or pubmed_id:citation_id or pubmed_id_1:citation_id_1, pubmed_id_2:citation_id_2, ... </br>
+No space before and after colon.
+</td>
+</tr>
+
+<tr>
+<td style="text-align:left;border-style:none;width:140px">Pubmed ID:</td>
+<td style="text-align:left;border-style:none"><textarea name="pubmed_ids" cols="120" rows="1" wrap></textarea></td>
+</tr>
+
+<tr><td style="text-align:center; border-style:none" colspan="2">&nbsp;</td></tr>
+
+<tr>
+<td style="text-align:left;border-style:none;width:140px">&nbsp;</td>
+<td style="text-align:left;border-style:none">Syntax: entry_id_1 [, entry_id_2, entry_id_3, .....]</td>
+</tr>
+
+<tr>
+<td style="text-align:left;border-style:none;width:140px">Select Entry by ID(s):</td>
+<td style="text-align:left;border-style:none"><textarea name="entry_ids" cols="120" rows="1" wrap>%(identifier)s</textarea></td>
+</tr>
+
+<tr><td style="text-align:center; border-style:none" colspan="2">&nbsp;</td></tr>
+
+<tr>
+<td style="text-align:center; border-style:none" colspan="2">
+<input id="run_citation_request" name="run_citation_request" class="run_request" value="Get Citation Info." type="button" />
+</td>
+</tr>
+</table>
+
+</form>

@@ -1,0 +1,89 @@
+#log << "ERROR - In block \"" << blockName << "\", key item \"" <<
+#  keyItems[k] << "\" not found in category \"" <<
+#  catTable.GetName() << "\"" << endl;
+#
+key item;not found in category
+#
+#log << "ERROR - category \"" << mandatoryCat <<
+#  "\" is mandatory, but it is not present in datablock \"" <<
+#  block.GetName() << "\"" << endl;
+#
+is mandatory, but it is not present in datablock
+#
+#log << "ERROR - In block \"" << blockName << "\", in " <<
+#  "cateogory \"" << (*valCatTableP).GetName() <<
+#  "\", values for key item(s):" << endl;
+#
+#for (unsigned int keyI = 0; keyI < keyItems.size(); ++keyI)
+#{
+#    log << "  \"" << keyItems[keyI] << "\"," << endl;
+#}
+#
+#log << "  in row #" << duplRows[rowI].first + 1 <<
+#  " are repeated in row #" << duplRows[rowI].second + 1 << endl;
+#
+in row #;are repeated in row #
+#
+#log << "ERROR - In block \"" << blockName <<
+#  "\", no mandatory items found in category \"" <<
+#  catTable.GetName() << "\"" << endl;
+#
+no mandatory items found in category
+#
+#log << "ERROR - In block \"" << block.GetName() <<
+#  "\", in item \"" << cifItemName << "\"";
+#log << ", in row #" << l + 1 << ", value \"" <<
+#  cell << "\" does not "\
+#  "correspond to item's type. The expected"\
+#  " type is \"" << typeCode << "\"." << endl;
+#
+does not correspond to item's type. The expected type is
+#
+#log << "ERROR - In block \"" << blockName <<
+#  "\", mandatory item \"" << itemName <<
+#  "\" is not in category \"" << catTable.GetName() <<
+#  "\"" << endl;
+#
+mandatory item;is not in category
+#
+#log << "ERROR - In block \"" << blockName <<
+#  "\", mandatory item \"" << cell <<
+#  "\" has invalid value \"" << catTable(rowI, itemName) <<
+#  "\"";
+#
+mandatory item;has invalid value
+#
+#log << "ERROR - In block \"" << block.GetName() <<
+#   "\", data type pattern of value \"" << cell <<
+#   "\" for \"" << cifItemName <<
+#   "\" does not match, in row #" << l + 1 << endl;
+#
+data type pattern of value;does not match, in row #
+#
+#log << "++ERROR - In block \"" << block.GetName() <<
+#  "\", parent category \"" << parCatName <<
+#  "\", of category \"" << catTable.GetName() <<
+#  "\", is missing." << endl;
+#
+parent category;is missing.
+#
+#log << "ERROR - In block \"" << block.GetName()
+#  << " unmatched value in " << catTable.GetName()
+#  << " row " << l+1 <<  " in parent category " <<
+#  parCatName  << endl;
+#
+unmatched value in;in parent category
+#
+#log << "ERROR PARCHILD \"" << linkGroupIdLabel <<
+#  "\" - In block \"" << block.GetName() <<
+#  "\", in category \"" << childCatName <<
+#  "\", in row# " << l + 1 <<
+#  ", unmatched value in the parent \"" << parCatName <<
+#  "\"";
+# 
+in category;unmatched value in the parent
+#
+# XML error
+#
+Schemas validity error : Element
+Error at (file stdin, line

@@ -1,0 +1,80 @@
+<h1 style="text-align:center">%(task)s (%(owner)s)</h1>
+
+<script>
+$(function() {
+var availableTags = [
+%(abbrev_info)s
+];
+$('#journal_abbrev').autocomplete({
+source: availableTags
+});
+});
+
+$('.add_author').live("click", function() {
+    var num = parseInt($('#max_author_num').val());
+    var text = '';
+    for (var i = 1; i <= 5; i++) {
+         text += '<tr>\n';
+         var t_num = num + i;
+         text += '<td style="text-align:left;border-style:none;width:140px">Author_' + t_num.toString() + ':</td>\n';
+         var name = 'name_' + t_num.toString();
+         text += '<td style="text-align:left;border-style:none"><input type="text" name="' + name + '" value="" size="65" /></td>\n';
+         var orcid = 'orcid_' + t_num.toString();
+         text += '<td style="text-align:left;border-style:none"><input type="text" name="' + orcid  + '" value="" size="55" /></td>\n';
+         text += '</tr>\n';
+    }
+    $('#citation_table tbody').append(text);
+    num += 5;
+    $('#max_author_num').val(num.toString());
+});
+</script>
+
+<form name="citation_update" id="citation_update" method="post">
+<input type="hidden" name="sessionid" id="sessionid_citation" value="%(sessionid)s" />
+<input type="hidden" name="annotator" id="annotator_citation" value="%(annotator)s" />
+<input type="hidden" name="owner" id="owner_citation" value="%(owner)s" />
+<input type="hidden" name="input_flag" id="input_flag" value="yes" />
+<input type="hidden" name="option" value="citation_update" />
+<input type="hidden" name="task" id="task_citation" value="%(task)s" />
+<table>
+<tr>
+<td style="text-align:center; border-style:none">
+<input id="citation_update_select_all" value="Select All" type="button" onClick="select_entry('citation_update', 'citation_update_select_all');" />
+</td>
+%(begin_select_all_comment)s
+<td style="text-align:center; border-style:none">
+<input id="citation_update_option" value="Copy Option" type="button" onClick="copy_option_from_first_selected_entry('citation_update');" />
+</td>
+%(end_select_all_comment)s
+<td style="text-align:center; border-style:none">
+<input id="run_citation_update_control" name="%(idlist)s" class="list_control" value="collapse all" type="button" />
+</td>
+<td style="text-align:center; border-style:none">
+<input id="run_citation_update" name="run_citation_update" class="run_update" value="Update citation without release" type="button" />
+</td>
+<td style="text-align:center; border-style:none">
+<input id="run_citation_update" name="run_citation_update" class="run_update" value="Update citation & release entries with release mark" type="button" />
+</td>
+<td style="text-align:center; border-style:none">
+<input id="run_add_author" name="run_add_author" class="add_author" value="Add Authors" type="button" />
+</td>
+</tr>
+</table>
+
+<br class="clearfloat" />
+<br />
+
+<table id="citation_table">
+<tbody>
+%(citation_info)s
+</tbody>
+</table>
+
+<br class="clearfloat" />
+<br />
+
+<table>
+%(entry_info)s
+</table>
+
+</form>

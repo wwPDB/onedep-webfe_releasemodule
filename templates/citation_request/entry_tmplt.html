@@ -1,0 +1,49 @@
+<tr>
+<td style="text-align:left;" class="%(bgclass)s">
+<input type="hidden" name="pdbid_%(structure_id)s" value="%(pdb_id)s" />
+<input type="hidden" id="status_code_%(structure_id)s" name="status_code_%(structure_id)s" value="%(status_code)s" />
+<span style="float: right;">
+<a href="/service/messaging/new_session/wf?identifier=%(structure_id)s&filesource=archive&annotator=%(annotator)s&expmethod=%(urlmethod)s%(locklabel)s" target = "_blank">Communication</a> %(major_issue)s
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+<input value="All checks" type="button" onclick="run_all_checks('%(structure_id)s');"  />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+</span>
+%(comment_start)s<input type="checkbox" name="entry" value="%(structure_id)s" %(check_option)s />%(comment_end)s %(stop_sign)s &nbsp;
+<a id="entry_%(structure_id)s" class="jshead ui-corner-all" href="#"><span class="fltlft"></span>
+<span>Entry: %(structure_id)s &nbsp; %(comb_ids)s &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color:%(status_color)s">Status: %(comb_status_code)s</span> </span>
+</a>
+<table style="display:inline-block">
+<tr>
+<td style="text-align:left;border-style:none;width:140px">Release Option:</td>
+<td style="text-align:left;border-style:none">%(release_option)s</td>
+</tr>
+<tr>
+<td style="text-align:left;border-style:none;width:140px">Entry ID:</td>
+<td style="text-align:left;border-style:none">%(entry_header)s</td>
+</tr>
+<tr>
+<td style="text-align:left;border-style:none;width:140px">PDB/BMRB/EMDB IDs:</td>
+<td style="text-align:left;border-style:none">%(comb_ids)s</td>
+</tr>
+<tr>
+<td style="text-align:left;border-style:none;width:140px">Annotator:</td>
+<td style="text-align:left;border-style:none">%(rcsb_annotator)s</td>
+</tr>
+<tr>
+<td style="text-align:left;border-style:none;width:140px"><font color="%(status_color)s">Status Code:</font></td>
+<td style="text-align:left;border-style:none"><font color="%(status_color)s">%(comb_status_code)s</font> %(status_warning)s </td>
+</tr>
+<tr>
+<td style="text-align:left;border-style:none;width:140px">Structure Title:</td>
+<td style="text-align:left;border-style:none">%(title)s</td>
+</tr>
+<tr>
+<td style="text-align:left;border-style:none;width:140px">Authors:</td>
+<td style="text-align:left;border-style:none">%(author_list)s</td>
+</tr>
+%(revision)s
+%(citation_info)s
+</table>
+</td>
+</tr>
+<tr><td style="border-style:none;"> &nbsp; </td></tr>
