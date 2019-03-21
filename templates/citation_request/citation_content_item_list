@@ -6,3 +6,7 @@ page
 year
 pdbx_database_id_PubMed
 pdbx_database_id_DOI
+citation_id
+keep_citation
+begin_keep_comment
+end_keep_comment
