@@ -523,6 +523,21 @@ $(document).ready(function() {
        }
 
        $('.run_update').live('click', function() {
+              if (($("#previous_doi_value").length > 0) && ($("#keep_citation_checkbox").length > 0) && 
+                  ($("#keep_citation_checkbox").prop("checked") == false)) {
+                   var previous_value = $("#previous_doi_value").attr('value').trim();
+                   var current_value = $("#pdbx_database_id_DOI").val().trim();
+                   if ((previous_value != "") && (current_value != "")) {
+                        var previous = previous_value.toUpperCase();
+                        var current = current_value.toUpperCase();
+                        if (previous != current) {
+                             var text = "The DOI value has been changed from '" + previous_value + "' to '" + current_value 
+                                      + "'. Do you want to continue without 'Keep Current Citation' box checked?";
+                             if (!window.confirm(text)) return;
+                        }
+                   }
+              }
+
               var task = $(this).attr('value');
 
               if (task == 'Release selected' || task == 'Update citation & release entries with release mark') {
