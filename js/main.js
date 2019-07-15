@@ -450,7 +450,13 @@ $(document).ready(function() {
                         if (new_status_code == 'REL' && $('#status_code_' + entryArr[i]).length > 0) {
                              var status_code = $('#status_code_' + entryArr[i]).attr('value'); 
                              if (status_code != 'REL' && status_code != 'HOLD' && status_code != 'HPUB') {
-                                 message += 'Releasing entry ' + entryArr[i] + ' with status code: ' + status_code +'\n\n';
+                                 message += 'Releasing entry ' + entryArr[i] + ' with status code: ' + status_code + '\n\n';
+                             }
+                        }
+                        if (new_status_code == 'REREL' && $('#post_release_flag_' + entryArr[i]).length > 0) {
+                             var code = $('#post_release_flag_' + entryArr[i]).attr('value').toUpperCase(); 
+                             if (code == 'Y') {
+                                 message += 'Releasing entry ' + entryArr[i] + ' with post release coordinate replacement\n\n';
                              }
                         }
                         if (new_status_code == 'OBS' && $('#supersede_' + entryArr[i]).length > 0) {

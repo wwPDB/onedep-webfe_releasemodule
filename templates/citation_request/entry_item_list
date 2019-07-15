@@ -11,6 +11,7 @@ title
 author_list
 rcsb_annotator
 status_code
+post_rel_recvd_coord
 comb_status_code
 status_warning
 release_option

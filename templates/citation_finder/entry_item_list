@@ -12,6 +12,7 @@ author_list
 similarity_score
 rcsb_annotator
 status_code
+post_rel_recvd_coord
 comb_status_code
 status_warning
 check_option
