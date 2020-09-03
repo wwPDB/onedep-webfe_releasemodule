@@ -275,6 +275,7 @@ $(document).ready(function() {
                 $('#obsolete_' + entryid).val('');
                 $('#span_supersede_' + entryid).show();
                 if ($('#author_supersede_' + entryid).length > 0) $('#supersede_' + entryid).val($('#author_supersede_' + entryid).val());
+                if ($('#author_obspr_details_' + entryid).length > 0) $('#obspr_details_' + entryid).val($('#author_obspr_details_' + entryid).val());
            } else {
                 $('#span_obsolete_' + entryid).hide();
                 $('#obsolete_' + entryid).val('');
@@ -459,10 +460,21 @@ $(document).ready(function() {
                                  message += 'Releasing entry ' + entryArr[i] + ' with post release coordinate replacement\n\n';
                              }
                         }
-                        if (new_status_code == 'OBS' && $('#supersede_' + entryArr[i]).length > 0) {
-                             var supersede_id = $('#supersede_' + entryArr[i]).attr('value');
-                             if (supersede_id == '') {
-                                 message += 'Obsoleting entry ' + entryArr[i] + ' without supersede ID\n\n';
+                        if (new_status_code == 'OBS') {
+                             var new_obsolete_flag = true;
+                             if ($('#reobsolete_' + entryArr[i]).length > 0) {
+                                  var reobsolete_value = $('#reobsolete_' + entryArr[i]).attr('value');
+                                  if (reobsolete_value == 'yes') new_obsolete_flag = false;
+                             }
+                             if (new_obsolete_flag) {
+                                  var supersede_id = '';
+                                  if ($('#supersede_' + entryArr[i]).length > 0) supersede_id = $('#supersede_' + entryArr[i]).attr('value');
+                                  var obspr_details = '';
+                                  if ($('#obspr_details_' + entryArr[i]).length > 0) obspr_details = $('#obspr_details_' + entryArr[i]).attr('value');
+                                  if ((supersede_id == '') && (obspr_details == '')) {
+                                       message += 'Obsoleting entry ' + entryArr[i] + ' without supersede ID and detail information\n\n';
+                                       error_flag = true;
+                                  }
                              }
                         }
                    }

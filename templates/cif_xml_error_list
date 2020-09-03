@@ -22,7 +22,7 @@ is mandatory, but it is not present in datablock
 #log << "  in row #" << duplRows[rowI].first + 1 <<
 #  " are repeated in row #" << duplRows[rowI].second + 1 << endl;
 #
-in row #;are repeated in row #
+in row;are repeated in row
 #
 #log << "ERROR - In block \"" << blockName <<
 #  "\", no mandatory items found in category \"" <<
@@ -38,6 +38,11 @@ no mandatory items found in category
 #  " type is \"" << typeCode << "\"." << endl;
 #
 does not correspond to item's type. The expected type is
+#
+#log << "ERROR - In block \"" << block.GetName() <<
+#  "\", value \"" << cell << "\" for \"" << cifItemName <<
+#  "\" is out of range, in row #" << l + 1 << endl;
+is out of range, in row
 #
 #log << "ERROR - In block \"" << blockName <<
 #  "\", mandatory item \"" << itemName <<
