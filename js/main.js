@@ -647,14 +647,12 @@ $(document).ready(function() {
               var task = $(this).attr('value');
               var updateform;
               var ual_var;
-              var citation_form_flag = 'no';
               if (task == 'Get Citation Info.') {
                    updateform = '#citation_request';
                    ual_var = '/service/release/citation_request';
               } else if (task == 'Input Citation Info.') {
                    updateform = '#citation_request';
                    ual_var = '/service/release/citation_request';
-                   citation_form_flag = 'yes';
               } else if (task == 'Get Entry Info.') {
                    updateform = '#entry_request';
                    ual_var = '/service/release/entry_request';
@@ -662,10 +660,11 @@ $(document).ready(function() {
                    updateform = '#marked_pubmed_request';
                    ual_var = '/service/release/marked_pubmed_request';
               }
-              $(updateform).ajaxSubmit({url: ual_var, async: false, clearForm: false,
-                   beforeSubmit: function (formData, jqForm, options) {
-                        formData.push({ 'name' : 'citationformflag', 'value' : citation_form_flag });
-                   }, success: function(jsonOBJ) {
+              var formData = new FormData($(updateform)[0]);
+
+              $.ajax({ type: 'POST', url: ual_var, async: false, clearForm: false, dataType: 'json',
+                   data: formData, cache: false, contentType: false, processData: false,
+                   success: function(jsonOBJ) {
                        if (!jsonOBJ.errorflag) {
                             $('#dt_rslts_combo').html('').hide();
                             $('#dt_rslts_combo').html(''+jsonOBJ.textcontent+'');
