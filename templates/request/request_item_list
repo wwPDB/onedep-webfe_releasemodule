@@ -1,5 +1,6 @@
 entry_header
 structure_id
+check_option
 stop_sign
 pdb_id
 comb_ids
