@@ -14,6 +14,12 @@
 <span>Entry: %(structure_id)s &nbsp; %(comb_ids)s &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color:%(status_color)s">Status: %(comb_status_code)s</span> </span>
 </a>
 <table style="display:inline-block">
+%(warning_comment_start)s
+<tr>
+<td style="text-align:left;border-style:none;width:140px"><font color="#FF0000">Warning:</font></td>
+<td style="text-align:left;border-style:none"><font color="#FF0000">%(warning_message)s</font></td>
+</tr>
+%(warning_comment_end)s
 <tr>
 <td style="text-align:left;border-style:none;width:140px">Release Option:</td>
 <td style="text-align:left;border-style:none">%(release_option)s</td>
