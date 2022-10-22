@@ -517,8 +517,9 @@ $(document).ready(function() {
                         if (!skip_flag && found_diff) {
                              if (new_release_flag) {
                                   // error_flag = true;
-                                  message += 'Releasing entry ' + entryArr[i] + ' with incorrect release option:' + curr_select + '\n\n';
-                                  message += 'Correct option should be:' + prev_select + '\n\n';
+                                  message += 'Releasing entry ' + entryArr[i] + ' with release option:' + curr_select + '\n\n';
+                                  message += 'Within this release cycle, this deposition was last released with the following option:' + prev_select + '\n\n';
+                                  message += 'Releasing with these new options may cause issues in the release process.\n';
                              } else {
                                   message += 'Releasing entry ' + entryArr[i] + ' with release option:' + curr_select + '\n\n';
                                   message += 'Different from previous release option:' + prev_select + '\n\n';
@@ -533,7 +534,7 @@ $(document).ready(function() {
                         return false;
                    }
 
-                   message += '\nDo you want to continue?';
+                   message += '\nAre you sure you want to continue?';
                    if (!confirm(message)) return false;
               }
 
