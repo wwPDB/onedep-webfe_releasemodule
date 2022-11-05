@@ -16,7 +16,8 @@ $('.add_author').live("click", function() {
     for (var i = 1; i <= 5; i++) {
          text += '<tr>\n';
          var t_num = num + i;
-         text += '<td style="text-align:left;border-style:none;width:140px">Author_' + t_num.toString() + ':</td>\n';
+         text += '<td style="text-align:left;border-style:none;width:140px">Author: &nbsp; <input style="width:25px" type="text" name="order_'
+               + t_num.toString() + '" value="' + t_num.toString() + '" size="3" /> </td>\n';
          var name = 'name_' + t_num.toString();
          text += '<td style="text-align:left;border-style:none"><input type="text" name="' + name + '" value="" size="65" /></td>\n';
          var orcid = 'orcid_' + t_num.toString();
