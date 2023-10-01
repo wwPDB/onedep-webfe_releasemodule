@@ -215,7 +215,7 @@ $(document).ready(function() {
 
        function updateRevisionSelection(entryid, r_status) {
             var revisionType = [ '#pdb_revdat_', '#pdbx_revision_' ];
-            if (r_status == 'REREL_modified' || r_status == 'OBS_obsolete') {
+            if ((r_status == 'REREL_modified') || (r_status == 'OBS_obsolete')) {
                  for (var i = 0; i < revisionType.length; i++) {
                       if ($(revisionType[i] + entryid).length > 0) {
                            $(revisionType[i] + entryid).show();
@@ -253,19 +253,19 @@ $(document).ready(function() {
            var id = $(this).attr('id');
            var entryid = id.substring(7)
            var sval = $(this).val(); 
-           if (sval == 'REL_added' || sval == 'OBS_obsolete') {
+           if ((sval == 'REL_added') || (sval == 'OBS_obsolete')) {
                 updateSlectExpFiles(entryid, sval);
            } else if (sval != '') {
                 updateSlectExpFiles(entryid, '');
            }
 /*
-           if (sval == 'REREL_modified' || sval == 'RELOAD_reloaded' || sval == 'CITATIONUpdate' || sval == 'OBS_obsolete') {
+           if ((sval == 'REREL_modified') || (sval == 'RELOAD_reloaded') || (sval == 'CITATIONUpdate') || (sval == 'OBS_obsolete')) {
                 updateRevisionSelection(entryid, sval);
            }
 */
            var slist = sval.split('_');
            var status_code = slist[0];
-           if (status_code == 'REL' || status_code == 'REREL') {
+           if ((status_code == 'REL') || (status_code == 'REREL')) {
                 $('#span_obsolete_' + entryid).show();
                 if ($('#author_obsolete_' + entryid).length > 0) $('#obsolete_' + entryid).val($('#author_obsolete_' + entryid).val());
                 $('#span_supersede_' + entryid).hide();
@@ -291,8 +291,7 @@ $(document).ready(function() {
             for (var i = 0; i < updateList.length; i++) {
                  var tag_id = '#' + updateList[i];
                  var style = $(tag_id).next().attr("style");
-                 if ((style == 'display: none;' && request == 'expand all') ||
-                     (style != 'display: none;' && request == 'collapse all')) {
+                 if (((style == 'display: none;') && (request == 'expand all')) || ((style != 'display: none;') && (request == 'collapse all'))) {
                       $(tag_id).next().toggle('fast');
                  }
             }
@@ -313,14 +312,14 @@ $(document).ready(function() {
               var updateType = $(this).attr('name');
               var task = $(this).attr('value');
               var owner = $('#owner').val();
-              if (owner == 'OTHER' && (updateType == 'release_onhold' || updateType == 'release_entry' || updateType == 'check_marked_pubmed_id' ||
-                  updateType == 'view_release_history' || updateType == 'view_last_release_info' || updateType == 'view_all_release_info' ||
-                  updateType == 'expired_onhold')) {
+              if ((owner == 'OTHER') && ((updateType == 'release_onhold') || (updateType == 'release_entry') || (updateType == 'check_marked_pubmed_id') ||
+                  (updateType == 'view_release_history') || (updateType == 'view_last_release_info') || (updateType == 'view_all_release_info') ||
+                  (updateType == 'expired_onhold'))) {
                    alert("Task '" + task + "' does not support user 'OTHER'.");
                    return false;
               }
-              if (owner == 'ALL' && (updateType == 'release_onhold' || updateType == 'check_marked_pubmed_id' ||
-                  updateType == 'view_release_history' || updateType == 'view_last_release_info' || updateType == 'view_all_release_info')) {
+              if ((owner == 'ALL') && ((updateType == 'release_onhold') || (updateType == 'check_marked_pubmed_id') || (updateType == 'view_release_history') ||
+                  (updateType == 'view_last_release_info') || (updateType == 'view_all_release_info'))) {
                    alert("Task '" + task + "' does not support user 'ALL'.");
                    return false;
               }
@@ -419,7 +418,7 @@ $(document).ready(function() {
                                   found_pubmed = true;
                              }
                         });
-                        if (!found_pubmed && input_flag != 'yes') {
+                        if (!found_pubmed && (input_flag != 'yes')) {
                              message += 'Entry ' + entryArr[i] + ' has no pubmed id selected\n\n';
                              error_flag = true;
                         }
@@ -429,8 +428,8 @@ $(document).ready(function() {
                    if ($('#status_' + entryArr[i]).length > 0) {
                         var select_val = $('#status_' + entryArr[i]).val();
 /*
-                        if (citation_only_flag != 'yes' && (select_val == 'REREL_modified' || select_val == 'RELOAD_reloaded' || select_val == 'OBS_obsolete')) {
-                             if (select_val == 'REREL_modified' || select_val == 'OBS_obsolete') {
+                        if ((citation_only_flag != 'yes') && ((select_val == 'REREL_modified') || (select_val == 'RELOAD_reloaded') || (select_val == 'OBS_obsolete'))) {
+                             if ((select_val == 'REREL_modified') || (select_val == 'OBS_obsolete')) {
                                   var revdat = get_checkbox_checked_list(updateform, 'revdat_' + entryArr[i]);
                                   if (revdat.length == 0) {
                                        message += 'Entry ' + entryArr[i] + ' has no REVDAT Record selected\n\n'
@@ -448,13 +447,13 @@ $(document).ready(function() {
                         if (list.length == 2) new_status_code = list[0];
                    }
                    if (citation_only_flag != 'yes') {
-                        if (new_status_code == 'REL' && $('#status_code_' + entryArr[i]).length > 0) {
+                        if ((new_status_code == 'REL') && ($('#status_code_' + entryArr[i]).length > 0)) {
                              var status_code = $('#status_code_' + entryArr[i]).attr('value'); 
                              if (status_code != 'REL' && status_code != 'HOLD' && status_code != 'HPUB') {
                                  message += 'Releasing entry ' + entryArr[i] + ' with status code: ' + status_code + '\n\n';
                              }
                         }
-                        if (new_status_code == 'REREL' && $('#post_release_flag_' + entryArr[i]).length > 0) {
+                        if ((new_status_code == 'REREL') && ($('#post_release_flag_' + entryArr[i]).length > 0)) {
                              var code = $('#post_release_flag_' + entryArr[i]).attr('value').toUpperCase(); 
                              if (code == 'Y') {
                                  message += 'Releasing entry ' + entryArr[i] + ' with post release coordinate replacement\n\n';
@@ -478,7 +477,7 @@ $(document).ready(function() {
                              }
                         }
                    }
-                   if (citation_only_flag != 'yes' && new_status_code == 'REL' || updateform == '#status_update') {
+                   if (((citation_only_flag != 'yes') && (new_status_code == 'REL')) || (updateform == '#status_update')) {
                         var value = $('#approval_type_' + entryArr[i]).val();
                         if (value == '') {
                              message += 'Entry ' + entryArr[i] + ' has no approval type selected\n\n'
@@ -486,10 +485,10 @@ $(document).ready(function() {
                         }
                    }
                    var new_release_flag = false;
-                   if ($('#new_release_flag_' + entryArr[i]).length > 0 && $('#new_release_flag_' + entryArr[i]).val() == 'yes') {
+                   if (($('#new_release_flag_' + entryArr[i]).length > 0) && ($('#new_release_flag_' + entryArr[i]).val() == 'yes')) {
                         new_release_flag = true;
                    }
-                   if (citation_only_flag != 'yes' && $('#pre_select_flag_' + entryArr[i]).length > 0 && $('#pre_select_flag_' + entryArr[i]).val() == 'yes') {
+                   if ((citation_only_flag != 'yes') && ($('#pre_select_flag_' + entryArr[i]).length > 0) && ($('#pre_select_flag_' + entryArr[i]).val() == 'yes')) {
                         var found_diff = false;
                         var skip_flag = false;
                         var curr_select = '';
@@ -542,8 +541,7 @@ $(document).ready(function() {
        }
 
        $('.run_update').live('click', function() {
-              if (($("#previous_doi_value").length > 0) && ($("#keep_citation_checkbox").length > 0) && 
-                  ($("#keep_citation_checkbox").prop("checked") == false)) {
+              if (($("#previous_doi_value").length > 0) && ($("#keep_citation_checkbox").length > 0) && ($("#keep_citation_checkbox").prop("checked") == false)) {
                    var previous_value = $("#previous_doi_value").attr('value').trim();
                    var current_value = $("#pdbx_database_id_DOI").val().trim();
                    if ((previous_value != "") && (current_value != "")) {
@@ -559,10 +557,10 @@ $(document).ready(function() {
 
               var task = $(this).attr('value');
 
-              if (task == 'Release selected' || task == 'Update citation & release entries with release mark') {
+              if ((task == 'Release selected') || (task == 'Update citation & release entries with release mark')) {
                    var d = new Date();
-                   if (d.getDay() == 5) {
-                        if (!window.confirm("It is Friday! Do you want to continue the release process?")) return;
+                   if (((d.getDay() == 4) && (d.getHours() >= 17)) || (d.getDay() == 5)) {
+                        if (!window.confirm("It is after cutoff deadline for release. You should not make any release after the deadline! Do you want to continue the release process?")) return;
                    }
               }
 
