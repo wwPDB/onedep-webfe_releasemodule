@@ -557,7 +557,7 @@ $(document).ready(function() {
 
               var task = $(this).attr('value');
 
-              if ((task == 'Release selected') || (task == 'Update citation & release entries with release mark')) {
+              if ((task == 'Release selected') || (task == 'Update citation & release entries with release mark') || (task == 'Pull selected entries from release')) {
                    var d = new Date();
                    if (((d.getDay() == 4) && (d.getHours() >= 17)) || (d.getDay() == 5)) {
                         if (!window.confirm("It is after cutoff deadline for release. You should not make any release after the deadline! Do you want to continue the release process?")) return;
