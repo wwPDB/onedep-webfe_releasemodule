@@ -314,7 +314,7 @@ $(document).ready(function() {
               var owner = $('#owner').val();
               if ((owner == 'OTHER') && ((updateType == 'release_onhold') || (updateType == 'release_entry') || (updateType == 'check_marked_pubmed_id') ||
                   (updateType == 'view_release_history') || (updateType == 'view_last_release_info') || (updateType == 'view_all_release_info') ||
-                  (updateType == 'expired_onhold'))) {
+                  (updateType == 'expired_onhold') || (updateType == 'auth_rel_status'))) {
                    alert("Task '" + task + "' does not support user 'OTHER'.");
                    return false;
               }
@@ -337,6 +337,8 @@ $(document).ready(function() {
                    Url = '/service/release/release_onhold';
               } else if (updateType == 'expired_onhold') {
                    Url = '/service/release/expired_onhold';
+              } else if (updateType == 'auth_rel_status') {
+                   Url = '/service/release/auth_rel_status';
               } else if (updateType == 'status_update') {
                    Url = '/service/release/status_update';
               } else if (updateType == 'release_entry') {
