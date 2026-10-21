@@ -90,6 +90,145 @@ function select_entry(formid, tagid) {
        }
 }
 
+function publicationEntryIds(section) {
+       var raw = section.find('.pub-select').attr('data-entry-ids') || '';
+       var parts = raw.split(/\s+/);
+       var ids = [];
+       for (var i = 0; i < parts.length; i++) {
+            if (parts[i]) ids.push(parts[i]);
+       }
+       return ids;
+}
+
+function entryCheckbox(structureId) {
+       return $('#citation_update input[name="entry"]').filter(function() {
+            return this.value === structureId;
+       });
+}
+
+function entryBlock(structureId) {
+       return $('#citation_update tbody.entry-block').filter(function() {
+            return $(this).attr('data-entry-id') === structureId;
+       });
+}
+
+function restoreEntryBlock(block) {
+       if (!block || block.length === 0) return;
+       var order = parseInt(block.attr('data-entry-order'), 10);
+       var table = $('#entry-view');
+       var before = null;
+       table.children('tbody.entry-block').each(function() {
+            var other = parseInt($(this).attr('data-entry-order'), 10);
+            if (other > order) {
+                 before = this;
+                 return false;
+            }
+       });
+       if (before) $(before).before(block);
+       else table.append(block);
+}
+
+function setPublicationOpen(section, open) {
+       var ids = publicationEntryIds(section);
+       var i;
+       if (open) {
+            var slot = section.find('table.pub-entries');
+            for (i = 0; i < ids.length; i++) slot.append(entryBlock(ids[i]));
+            section.addClass('open');
+            section.find('.pub-toggle').val('Collapse').attr('aria-expanded', 'true');
+       } else {
+            for (i = 0; i < ids.length; i++) restoreEntryBlock(entryBlock(ids[i]));
+            section.removeClass('open');
+            section.find('.pub-toggle').val('Expand').attr('aria-expanded', 'false');
+       }
+}
+
+function setPublicationChecked(section, checked) {
+       section.find('.pub-select').prop('checked', checked);
+       var ids = publicationEntryIds(section);
+       for (var i = 0; i < ids.length; i++) entryCheckbox(ids[i]).prop('checked', checked);
+}
+
+function select_citation_entries(formid, tagid) {
+       var form = $('#' + formid);
+       if (form.find('.view-toggle').length === 0) {
+            select_entry(formid, tagid);
+            return;
+       }
+       var turnOn = $('#' + tagid).attr('value') == 'Select All';
+       if (form.attr('data-view') === 'publication') {
+            form.find('#publication-view section.pub:visible').each(function() {
+                 setPublicationChecked($(this), turnOn);
+            });
+       } else {
+            form.find('#entry-view tbody.entry-block:visible input[name="entry"]').prop('checked', turnOn);
+       }
+       $('#' + tagid).attr('value', turnOn ? 'Unselect All' : 'Select All');
+}
+
+function setCitationView(name) {
+       var form = $('#citation_update');
+       if (name !== 'publication') {
+            form.find('#publication-view section.pub').each(function() {
+                 setPublicationOpen($(this), false);
+            });
+       }
+       form.attr('data-view', name);
+       form.find('.view-toggle').each(function() {
+            $(this).toggleClass('active', $(this).attr('data-view') === name);
+       });
+       $('#citation_update_option').prop('disabled', name === 'publication');
+       $('#run_citation_update_control').attr('value', 'expand all').val('expand all');
+       applyCitationFilter();
+}
+
+function applyCitationFilter() {
+       var form = $('#citation_update');
+       var filter = $('#citation-filter');
+       if (filter.length === 0) return;
+       var needle = (filter.val() || '').toLowerCase();
+       var view = form.attr('data-view') || 'entry';
+       var shownEntries = 0;
+       var totalEntries = form.find('tbody.entry-block').length;
+       form.find('tbody.entry-block').each(function() {
+            var hit = view !== 'entry' || !needle || ($(this).attr('data-q') || '').indexOf(needle) !== -1;
+            this.style.display = hit ? '' : 'none';
+            if (view === 'entry' && hit) shownEntries += 1;
+       });
+       var shownPubs = 0;
+       var totalPubs = form.find('#publication-view section.pub').length;
+       form.find('#publication-view section.pub').each(function() {
+            var hit = !needle || ($(this).attr('data-q') || '').indexOf(needle) !== -1;
+            this.style.display = hit ? '' : 'none';
+            if (hit) shownPubs += 1;
+       });
+       var totalCell = $('#citation-summary-total');
+       if (view === 'publication') {
+            var pubLabel = needle ? (shownPubs + ' of ' + totalPubs) : String(totalPubs);
+            totalCell.text('Total ' + pubLabel + ' publications (' + totalEntries + ' entries)');
+            $('#citation-filter-count').text(shownPubs + ' of ' + totalPubs + ' publications');
+       } else {
+            if (needle) totalCell.text('Total ' + shownEntries + ' of ' + totalEntries + ' entries');
+            else totalCell.text('Total ' + totalEntries + ' entries');
+            $('#citation-filter-count').text(shownEntries + ' of ' + totalEntries + ' entries');
+       }
+}
+
+function refreshCitationFinder() {
+       applyCitationFilter();
+}
+
+function fallbackCopyText(text, done) {
+       var area = document.createElement('textarea');
+       area.value = text;
+       area.style.position = 'fixed';
+       area.style.opacity = '0';
+       document.body.appendChild(area);
+       area.select();
+       try { document.execCommand('copy'); done(); } catch (e) { window.prompt('Copy:', text); }
+       document.body.removeChild(area);
+}
+
 function get_selected_entries(formid) {
        var entries = [];
        $('#' + formid).find('input[name="entry"]').each(function() {
@@ -286,6 +425,15 @@ $(document).ready(function() {
        });
 
        $('.list_control').live("click", function() {
+            if ($(this).attr('id') === 'run_citation_update_control' && $('#citation_update').attr('data-view') === 'publication') {
+                 var expand = $(this).attr('value') === 'expand all';
+                 $('#publication-view section.pub').each(function() {
+                      if (this.style.display === 'none') return;
+                      setPublicationOpen($(this), expand);
+                 });
+                 $(this).attr('value', expand ? 'collapse all' : 'expand all').val(expand ? 'collapse all' : 'expand all');
+                 return;
+            }
             var updateList = $(this).attr('name').split(' ');
             var request = $(this).attr('value');
             for (var i = 0; i < updateList.length; i++) {
@@ -368,6 +516,7 @@ $(document).ready(function() {
                                 $('#dt_rslts_combo').html('').hide();
                                 $('#dt_rslts_combo').html(''+jsonOBJ.textcontent+'');
                                 $('#dt_rslts_combo').show();
+                                refreshCitationFinder();
                            } else {
                                 alert(jsonOBJ.errortext);
                            }
@@ -670,6 +819,7 @@ $(document).ready(function() {
                             $('#dt_rslts_combo').html('').hide();
                             $('#dt_rslts_combo').html(''+jsonOBJ.textcontent+'');
                             $('#dt_rslts_combo').show();
+                            refreshCitationFinder();
                        } else {
                             alert(jsonOBJ.errortext);
                        }
@@ -700,6 +850,102 @@ $(document).ready(function() {
                        } 
               });
        });
+
+       $(document).on('click', '#citation_update .view-toggle', function() {
+            setCitationView($(this).attr('data-view'));
+       });
+
+       $(document).on('click', '#citation_update .pub-toggle', function() {
+            var section = $(this).closest('section.pub');
+            setPublicationOpen(section, !section.hasClass('open'));
+       });
+
+       $(document).on('change', '#citation_update .pub-select', function() {
+            setPublicationChecked($(this).closest('section.pub'), $(this).prop('checked'));
+       });
+
+       $(document).on('change', '#citation_update input[name="entry"]', function() {
+            var id = this.value;
+            $('#publication-view section.pub').each(function() {
+                 var ids = publicationEntryIds($(this));
+                 var found = false;
+                 var i;
+                 for (i = 0; i < ids.length; i++) {
+                      if (ids[i] === id) found = true;
+                 }
+                 if (!found) return;
+                 var all = true;
+                 for (i = 0; i < ids.length; i++) {
+                      var box = entryCheckbox(ids[i]);
+                      if (box.length === 0 || !box.prop('checked')) all = false;
+                 }
+                 $(this).find('.pub-select').prop('checked', all);
+            });
+       });
+
+       $(document).on('click', '#citation_update .pub-unwanted', function() {
+            var section = $(this).closest('section.pub');
+            var pubmedId = $(this).attr('data-pubmed');
+            var ids = publicationEntryIds(section);
+            var selected = [];
+            for (var i = 0; i < ids.length; i++) {
+                 var box = entryCheckbox(ids[i]);
+                 if (box.length && box.prop('checked')) selected.push(ids[i]);
+            }
+            if (selected.length === 0) {
+                 alert('No entry selected.');
+                 return;
+            }
+            var index = 0;
+            var errors = [];
+            function next() {
+                 if (index >= selected.length) {
+                      $("#loading").fadeOut('fast').spin(false);
+                      if (errors.length) alert(errors.join('\n'));
+                      else if (selected.length === 1) alert('Mark ' + selected[0] + ' as unwanted.');
+                      else alert('Marked ' + selected.length + ' entries as unwanted.');
+                      return;
+                 }
+                 var identifier = selected[index];
+                 index += 1;
+                 $.ajax({ type: 'POST', async: true, url: '/service/release/mark_pubmed_id',
+                      data: 'identifier=' + identifier + '&pubmed_id=' + pubmedId + '&sessionid=' + SESSION_ID,
+                      dataType: 'json',
+                      success: function(jsonOBJ) {
+                           if (jsonOBJ.errorflag) errors.push(jsonOBJ.errortext);
+                           next();
+                      },
+                      error: function (data, status, e) {
+                           errors.push(String(e));
+                           next();
+                      }
+                 });
+            }
+            $("#loading").fadeIn('slow').spin("large", "black");
+            next();
+       });
+
+       $(document).on('click', '#citation_update .pub-copy', function() {
+            var button = $(this);
+            var text = button.attr('data-value') || '';
+            function done() {
+                 var was = button.val();
+                 button.val('Copied');
+                 setTimeout(function() { button.val(was); }, 1200);
+            }
+            if (navigator.clipboard && window.isSecureContext) {
+                 navigator.clipboard.writeText(text).then(done, function() { fallbackCopyText(text, done); });
+            } else {
+                 fallbackCopyText(text, done);
+            }
+       });
+
+       $(document).on('input', '#citation-filter', applyCitationFilter);
+       $(document).on('keydown', '#citation-filter', function(event) {
+            if (event.which === 13) event.preventDefault();
+       });
+
+       refreshCitationFinder();
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

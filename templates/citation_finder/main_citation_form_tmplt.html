@@ -13,8 +13,9 @@
 <tr><td style="text-align:center; border-style:none" colspan="4">&nbsp;</td></tr>
 <tr>
 <td style="text-align:center; border-style:none">
-<input id="citation_update_select_all" value="Select All" type="button" onClick="select_entry('citation_update', 'citation_update_select_all');" />
+<input id="citation_update_select_all" value="Select All" type="button" onClick="select_citation_entries('citation_update', 'citation_update_select_all');" />
 </td>
+%(view_toggle)s
 %(begin_select_all_comment)s
 <td style="text-align:center; border-style:none">
 <input id="citation_update_option" value="Copy Option" type="button" onClick="copy_option_from_first_selected_entry('citation_update');" />
@@ -31,10 +32,14 @@
 </td>
 </tr>
 </table>
+%(filter_bar)s
 <br class="clearfloat" />
 <br />
-<table>
+<table id="entry-view">
 %(entry_info)s
 </table>
+<div id="publication-view">
+%(publication_info)s
+</div>
 
 </form>

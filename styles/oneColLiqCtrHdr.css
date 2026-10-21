@@ -447,6 +447,39 @@ span.jPag-sprevious-img{
 span.jPag-snext-img{
     background:transparent url(../images/snext.png) no-repeat center left;
             }
+#publication-view { display: none; }
+#citation_update[data-view="publication"] #entry-view { display: none; }
+#citation_update[data-view="publication"] #publication-view { display: block; }
+.view-toggle.active { background: #696; color: #fff; font-weight: bold; }
+#citation_update_option:disabled { opacity: .45; }
+.pub-bar { margin: 8px 0; }
+#citation-filter { width: 70%; font: inherit; padding: 4px 8px; }
+.pub-tally { margin-left: 10px; color: #555; }
+#publication-view section.pub {
+	border: #7daf71 1px solid;
+	margin: 0 0 8px;
+	padding: 6px 8px;
+	text-align: left;
+}
+#publication-view section.pub.preprint { border-left: 6px solid #e0a100; }
+.pub-head { margin-bottom: 6px; }
+.pub-head .n { margin: 0 8px; color: #888; }
+.pub-head .count { margin-right: 8px; }
+.pub-badge {
+	font-size: .85em;
+	background: #ffeec2;
+	color: #7a4f00;
+	border-radius: 10px;
+	padding: 1px 8px;
+	margin-right: 8px;
+}
+#publication-view .field { display: flex; align-items: flex-start; gap: 8px; margin: 2px 0; }
+#publication-view .field .k { width: 150px; flex: none; color: #333; padding-top: 2px; }
+#publication-view .field .v { flex: 1 1 auto; text-align: left; }
+#publication-view section.pub.open .pub-unwanted { display: none; }
+.status-alert { color: #FF0000; font-weight: bold; }
+#publication-view table.pub-entries { margin-top: 8px; }
+
 @media print{body{color:#000 !important}
 a, a:link, a:visited{color:#000 !important; text-decoration:none !important}
 .noprint{display:none;}
