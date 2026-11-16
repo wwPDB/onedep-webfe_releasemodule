@@ -473,9 +473,23 @@ span.jPag-snext-img{
 	padding: 1px 8px;
 	margin-right: 8px;
 }
-#publication-view .field { display: flex; align-items: flex-start; gap: 8px; margin: 2px 0; }
-#publication-view .field .k { width: 150px; flex: none; color: #333; padding-top: 2px; }
-#publication-view .field .v { flex: 1 1 auto; text-align: left; }
+#publication-view .field {
+	display: grid;
+	grid-template-columns: 6em 150px minmax(0, 1fr);
+	column-gap: 8px;
+	align-items: start;
+	margin: 2px 0;
+}
+#publication-view .field .pub-copy {
+	grid-column: 1;
+	width: 100%;
+	min-width: 0;
+	box-sizing: border-box;
+	font: inherit;
+	padding: 0 4px;
+}
+#publication-view .field .k { grid-column: 2; color: #333; padding-top: 2px; }
+#publication-view .field .v { grid-column: 3; min-width: 0; text-align: left; overflow-wrap: anywhere; }
 #publication-view section.pub.open .pub-unwanted { display: none; }
 .status-alert { color: #FF0000; font-weight: bold; }
 #publication-view table.pub-entries { margin-top: 8px; }
